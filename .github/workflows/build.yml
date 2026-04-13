@@ -37,10 +37,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Get Latest IceRaven ARM64 Release (Upstream)
+      - name: Get Latest IceRaven armeabi-v7a Release (Upstream)
         id: get_upstream_release
         run: |
-          LATEST_RELEASE=$(jq -r '.assets[] | select(.name | contains("arm64") and contains("forkRelease.apk")) | .browser_download_url' < <(curl -s https://api.github.com/repos/fork-maintainers/iceraven-browser/releases/latest))
+          LATEST_RELEASE=$(jq -r '.assets[] | select(.name | contains("armeabi") and contains("forkRelease.apk")) | .browser_download_url' < <(curl -s https://api.github.com/repos/fork-maintainers/iceraven-browser/releases/latest))
           echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_OUTPUT
           ICERAVEN_VERSION=$(echo "$LATEST_RELEASE" | sed -E 's/.*iceraven-(.*)-browser.*/\1/')
           echo "ICERAVEN_VERSION=$ICERAVEN_VERSION" >> $GITHUB_OUTPUT
