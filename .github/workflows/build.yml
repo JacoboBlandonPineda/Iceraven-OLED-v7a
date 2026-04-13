@@ -23,6 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           latest: true
+          doNotFailIfNotFound: true
           # Optional: You might want to specify a repository if it's not the current one,
           # but for checking your own repo, 'owner/repo' isn't usually needed.
           # If this action ever fails to find a release, its outputs will be empty.
