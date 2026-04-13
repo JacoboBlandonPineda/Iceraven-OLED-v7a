@@ -45,16 +45,13 @@ jobs:
           ICERAVEN_VERSION=$(echo "$LATEST_RELEASE" | sed -E 's/.*iceraven-(.*)-browser.*/\1/')
           echo "ICERAVEN_VERSION=$ICERAVEN_VERSION" >> $GITHUB_OUTPUT
           echo "Current upstream IceRaven version: $ICERAVEN_VERSION"
-
       - name: Check if new version is available
         id: version_check
         run: |
           UPSTREAM_VERSION="${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}"
           THIS_REPO_VERSION="${{ steps.this_repo_latest_release.outputs.tag_name }}"
-
           echo "Upstream IceRaven version: $UPSTREAM_VERSION"
           echo "This repository's latest release version: ${THIS_REPO_VERSION:-"No previous release found."}"
-
           if [ "$UPSTREAM_VERSION" != "$THIS_REPO_VERSION" ]; then
             echo "::set-output name=NEW_VERSION_AVAILABLE::true"
             echo "New version available! Building and releasing."
