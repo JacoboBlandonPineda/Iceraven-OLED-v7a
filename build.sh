@@ -38,6 +38,11 @@ if [ -n "$CDT" ]; then
   echo "[OLED] ColorDarkTokens patched (M3 background/surface)"
 fi
 
+# GeckoView loading/cover background (#2A2A2E -> black)
+find iceraven-patched -path '*/org/mozilla/geckoview/GeckoView.smali' -exec sed -i 's/-0xd5d5d2/-0x1000000/g' {} +
+find iceraven-patched -path '*/mozilla/components/browser/engine/gecko/GeckoEngineView.smali' -exec sed -i 's/-0xd5d5d2/-0x1000000/g' {} +
+echo "[OLED] GeckoView loading background -> black"
+
 # Recompile the APK
 java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk --use-aapt2
 
